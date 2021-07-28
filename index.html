@@ -11,15 +11,45 @@
     <div class="container">
         <img src="./images/cash-payment.png"/>
         <h1>CASH REGISTER</h1>
-        <span>Total Bill Amount</span>
-        <input type="number" name="billAmt" class="billAmount"></input>
-        <label class="next-btn" >Next</label>
+        <div id="bill">
+            <span >Total Bill Amount</span>
+            <input type="number" name="billAmt" class="billAmount" placeholder="Enter Bill Amount"></input>
+            <br>
+            <label class="next-btn" >Next</label>
+        </div>
         <div class="cash-Given">
             <span>Cash Given</span>
-            <input type="number" name="cashGiven" class="cashGiven"></input>
-            <label class="next-btn" id="check-btn" >Check</label>
+            <input type="number" name="cashGiven" class="cashGiven" placeholder="Enter cash"></input>
+            <label class="check-btn" id="check-btn" >Check</label>
         </div>
-
+        <div class="err-msg">
+            <p id="err-opt"> Please Enter a Valid Amount</p>
+        </div>
+        <div class="opt">
+            <table>
+                <tr>
+                    <th>Note</td>
+                        <td>2000</td>
+                        <td>500</td>
+                        <td>100</td>
+                        <td>20</td>
+                        <td>10</td>
+                        <td>5</td>
+                        <td>1</td>
+                </tr>
+                <tr>
+                    <th>No.of Notes</td>
+                        <td class="showNotes"></td>
+                        <td class="showNotes"></td>
+                        <td class="showNotes"></td>
+                        <td class="showNotes"></td>
+                        <td class="showNotes"></td>
+                        <td class="showNotes"></td>
+                        <td class="showNotes"></td>
+                </tr>
+            </table>
+        </div>
+        <label class="check-btn" id="reset-btn" >Reset</label>
     </div>
     <script async src="./script.js"></script>
 </body>

@@ -1,88 +1,78 @@
-
+let cashDenomination = [2000, 500, 100,  20, 10, 5, 1];
 let bilAmount = document.querySelector(".billAmount");
+let billDiv = document.querySelector("#bill");
 let cashGivenDiv = document.querySelector(".cash-Given");
 let cashReceived = document.querySelector(".cashGiven");
 const nextBtn = document.querySelector(".next-btn");
 const checkBtn = document.querySelector("#check-btn");
-let cashDenomination = [2000, 500, 200, 100, 50, 20, 10, 5, 2, 1];
-
-let hide = () => {
+var showNotes = document.querySelectorAll(".showNotes");
+var output = document.querySelector(".opt");
+var errDisplay = document.querySelector(".err-msg");
+var errMessage = document.querySelector("#err-opt");
+const resetBtn = document.querySelector("#reset-btn");
+function balanceNote() {
+    var retrnAmt = cashReceived.value - bilAmount.value;
+    console.log(retrnAmt);
+    
+    if (retrnAmt == 0) {
+        showErr("No need to return any amount");
+    }
+    else {
+        for (var i = 0; i < cashDenomination.length; i++){
+            var note = Math.floor(retrnAmt / cashDenomination[i]);
+            console.log(note);
+            if (note > 0) {
+                showNotes[i].innerHTML = note;
+            }
+            retrnAmt -= (note * cashDenomination[i]);
+        }
+    
+    }
+    hideErr();
+    bilAmount.style.display = "none";
     cashGivenDiv.style.display = "none";
+    nextBtn.style.display = "none";
+    billDiv.style.display = "none";
+    output.style.display = "block";
+    resetBtn.style.display = "block";
+    console.log(retrnAmt);
+    // }
+       
 };
-let show = () => {
-    cashGivenDiv.style.display = "block";
-};
+
+
 nextBtn.addEventListener('click', () => {
-    if (Number(bilAmount.value) === '') {
-        alert("Please enter bill amount.");
-        console.log(Number(bilAmount.value));
+    if (bilAmount.value === '') {
+        showErr("Please Enter a valid bill amount");
+        
     } else {
-        show();
+        hideErr();
+        cashGivenDiv.style.display = "block";
+        nextBtn.style.display = "none";
+        resetBtn.style.display = "none";
+        console.log(bilAmount.value);
     }
-});
-// function next() {
-//     if (Number(bilAmount.value) === '') {
-//         alert("Please enter bill amount.");
-//         console.log(Number(bilAmount.value));
-//     } else {
-//         show();
-//     }
-// };
-let balanceAmt = 0;
+})
 checkBtn.addEventListener('click', () => {
-    let bill = Number(bilAmount.value);
-    let amtReceived = Number(cashReceived.value);
-    if (bill > 0 && amtReceived > 0) {
-        if (!Number.isInteger(amtReceived)){
-            alert("Enter correct cash given");
-            return;
-        } if(bill > amtReceived){
-            alert("Cash isless than bill, enter correct amount.");
-            return;
-        }
-        balance(bill, amtReceived);
-    } else {
-        alert("enter correct bill");
-    }
-    
-});
-let balance = (bill, amtReceived) => {
-    balanceAmt = amtReceived - bill;
-    
-    if (balanceAmt <1) {
-        alert("no return");
+    if (cashReceived.value < 0 || cashReceived.value === '') {
+        showErr("Enter a valid cash amount.")
         return;
-    } 
-        for (let i = 0; i < cashDenomination.length[i]; i++){
-            balanceAmt = compare(balanceAmt, cashDenomination.length[i], i);
-            console.log(balanceAmt);
-        }
-        console.log(balanceAmt);
-};
-let compare = (returnAmt, noteAmt, i) => {
-    if (returnAmt >= noteAmt) {
-        let notes = Math.floor(returnAmt / noteAmt);
-        returnAmt = returnAmt - notes * noteAmt;
-        console.log(returnAmt);
-        console.log(notes);
-        console.log(noteAmt[i]);
     }
-    return returnAmt;
-    
-}
+    if (Number(bilAmount.value) < Number(cashReceived.value)) {
+        balanceNote();
+        
+    } else {
+        showErr("Cash amount should be greater than bill amount.")
+    }
+})
 
-// let check = () => {
-//     let bill = Number(bilAmount.value);
-//     let amtReceived = Number(cashReceived.value);
-
-//     if (amtReceived > bill) {
-//         balanceAmt = amtReceived - bill;
-//         console.log(bill,amtReceived);
-//         console.log(balanceAmt);
-//     } else {
-//         console.log("no");
-//         console.log(bill,amtReceived);
-//     }
-//  };
-
-
+resetBtn.addEventListener('click', () => {
+    window.location.reload();
+} )
+function hideErr() {
+    errDisplay.style.display = "none";
+ }
+function showErr(msg) {
+    errMessage.innerHTML = msg;
+    errDisplay.style.display = "block";
+ }

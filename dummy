@@ -1,0 +1,187 @@
+let cashDenomination = [2000, 500, 200, 100, 50, 20, 10, 5, 1];
+let bilAmount = document.querySelector(".billAmount");
+let cashGivenDiv = document.querySelector(".cash-Given");
+let cashReceived = document.querySelector(".cashGiven");
+const nextBtn = document.querySelector(".next-btn");
+const checkBtn = document.querySelector("#check-btn");
+var showNotes = document.querySelectorAll(".showNotes");
+var output = document.querySelector(".opt");
+let hide = () => {
+    cashGivenDiv.style.display = "none";
+};
+let show = () => {
+    cashGivenDiv.style.display = "block";
+};
+nextBtn.addEventListener('click', () => {
+    if (bilAmount.value === '') {
+        alert("Please enter bill amount.");
+        
+    } else {
+        show();
+        console.log(bilAmount.value);
+    }
+});
+checkBtn.addEventListener('click', () => {
+    if (cashReceived.value < 0 || cashReceived.value === '') {
+        alert("Enter cash amount");
+        return;
+    }
+    if (bilAmount.value <= cashReceived.value) {
+        balanceNote();
+        
+    } else {
+        alert("cash amount can't be less");
+    }
+});
+
+function balanceNote() {
+    var bill = bilAmount.value;
+    var cash = cashReceived.value;
+    var returnAmt = cash - bill;
+    // console.log(returnAmt);
+    if (returnAmt === 0) {
+        alert("no return");
+        return;
+    }  
+        for (var i = 0; i < cashDenomination.length[i]; i++){
+            var note = Math.floor(returnAmt / cashDenomination[i]);
+            console.log(note);
+            if (note > 0) {
+                showNotes[i].innerHTML = `${note}`;
+            }
+            returnAmt -= (note * cashDenomination[i]);
+            
+        }
+        output.style.display = "block";
+
+    console.log(returnAmt);
+    return returnAmt;
+    
+}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cash Register</title>
+</head>
+<link rel= "stylesheet" href="./styles.css">
+<body>
+    <div class="container">
+        <img src="./images/cash-payment.png"/>
+        <h1>CASH REGISTER</h1>
+        <span>Total Bill Amount</span>
+        <input type="number" name="billAmt" class="billAmount"></input>
+        <label class="next-btn" >Next</label>
+        <div class="cash-Given">
+            <span>Cash Given</span>
+            <input type="number" name="cashGiven" class="cashGiven"></input>
+            <label class="check-btn" id="check-btn" >Check</label>
+        </div>
+        <div class="opt">
+            <table>
+                <tr>
+                    <th>Note</td>
+                        <td>2000</td>
+                        <td>500</td>
+                        <td>100</td>
+                        <td>20</td>
+                        <td>10</td>
+                        <td>5</td>
+                        <td>1</td>
+                </tr>
+                <tr>
+                    <th>No.of Notes</td>
+                        <td class="showNotes"></td>
+                        <td class="showNotes"></td>
+                        <td class="showNotes"></td>
+                        <td class="showNotes"></td>
+                        <td class="showNotes"></td>
+                        <td class="showNotes"></td>
+                        <td class="showNotes"></td>
+                </tr>
+            </table>
+        </div>
+
+    </div>
+    <script async src="./script.js"></script>
+</body>
+
+</html>
+
+
+.container{
+    display: grid;
+    justify-content: center;
+    
+}
+h1{
+    color: aqua;
+    margin: 0rem 30rem 2rem 33rem;
+}
+img{
+    margin: 0rem 30rem 1rem 35rem;
+    width: 15%;
+}
+input{
+    width: 20rem;
+    padding: 1rem;
+    margin: 1rem 30rem;
+    text-align: center;
+}
+
+span{
+    width: 20rem;
+    padding: 1rem;
+    margin: -1rem 35rem;
+    text-align: center;
+    
+}
+.next-btn{
+    width: 10rem;
+    padding: 1rem;
+    margin: 0rem 35rem 1rem 35rem;
+    text-align: center;
+    border: 1px solid ;
+    border-radius: 1rem;
+    background-color: rgb(84, 221, 226);
+}
+.check-btn{
+    width: 20rem;
+    padding: 1rem;
+    margin: 1rem 14rem 1rem 40rem;
+    text-align: center;
+    border: 1px solid ;
+    border-radius: 1rem;
+    background-color: rgb(84, 221, 226);
+}
+.cash-Given{
+    display: none;
+}
+.cashGiven{
+    width: 20rem;
+    padding: 1rem;
+    margin: 1rem 30rem 2rem 30rem;
+    text-align: center;
+}
+.opt {
+    padding: 2rem 1rem;
+    margin: auto;
+    max-width: 450px;
+}
+
+.opt table,
+td,
+th {
+    padding: 0.6rem;
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+table {
+    width: 100%;
+    table-layout: fixed;
+}
