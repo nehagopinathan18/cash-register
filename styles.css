@@ -1,0 +1,39 @@
+.container{
+    display: grid;
+    justify-content: center;
+    margin: 1rem 20rem 1rem 20rem;
+    border: 1px solid black;
+}
+h1{
+    color: aqua;
+    margin: 0rem 30rem 2rem 33rem;
+}
+img{
+    margin: 0rem 30rem 1rem 35rem;
+    width: 15%;
+}
+input{
+    width: 20rem;
+    padding: 1rem;
+    margin: 1rem 30rem;
+    text-align: center;
+}
+span{
+    width: 20rem;
+    padding: 1rem;
+    margin: -1rem 35rem;
+    text-align: center;
+    
+}
+.next-btn{
+    width: 10rem;
+    padding: 1rem;
+    margin: 0rem 35rem 1rem 35rem;
+    text-align: center;
+    border: 1px solid ;
+    border-radius: 1rem;
+    background-color: rgb(84, 221, 226);
+}
+.cash-Given{
+    display: none;
+}
